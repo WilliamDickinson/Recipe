@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n\n\n<app-createrecipe></app-createrecipe>\n\n<!-- <router-outlet></router-outlet> -->\n"
+module.exports = "\n\n<app-tryrecipe></app-tryrecipe>\n\n<!-- <app-createrecipe></app-createrecipe> -->\n\n<!-- <router-outlet></router-outlet> -->\n"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = "\n\n\n<app-createrecipe></app-createrecipe>\n\n<!-- <router-ou
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>createrecipe works!</p>\n\n<button (click)=\"testThing()\">Test</button>\n\n<!-- <button (click)=\"t1.togglePause()\">Update Timer</button>\n<p>Timer1: {{ t1.timeleft | date: \"mm:ss\"}}</p>\n<hr>\n<button (click)=\"t2.togglePause()\">Update Timer2</button>\n<p>Timer2: {{ t2.timeleft | date: \"mm:ss\"}}</p> -->\n<!-- <p>Timer2: {{ t2.timeleft | date: \"HH:mm:ss\"}}</p> -->\n"
+module.exports = "<p>createrecipe works!</p>\n"
 
 /***/ }),
 
@@ -63,7 +63,7 @@ module.exports = "<p>searchrecipe works!</p>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>tryrecipe works!</p>\n"
+module.exports = "<p>tryrecipe works!</p>\n\n<button (click)=\"testThing()\">Test</button>\n\n<!-- <button (click)=\"t1.togglePause()\">Update Timer</button>\n<p>Timer1: {{ t1.timeleft | date: \"mm:ss\"}}</p>\n<hr>\n<button (click)=\"t2.togglePause()\">Update Timer2</button>\n<p>Timer2: {{ t2.timeleft | date: \"mm:ss\"}}</p> -->\n<!-- <p>Timer2: {{ t2.timeleft | date: \"HH:mm:ss\"}}</p> -->\n\n\n<table>\n    <tr *ngFor=\"let i of instructions\">\n        <td *ngIf=\"i.issub\">Is a sub - </td>\n        <td *ngIf= \"i.timer === null; else elseBlock\"><input type=\"checkbox\"></td>\n        <ng-template #elseBlock>{{i.timer.timeleft | date: \"mm:ss\"}}</ng-template>\n        <td>{{i.description}}</td>\n        <td>{{i.option}}</td>\n        <td>{{i.timer}}</td>\n    </tr>\n\n</table>"
 
 /***/ }),
 
@@ -211,41 +211,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreaterecipeComponent", function() { return CreaterecipeComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/models/Instruction */ "./src/app/models/Instruction.ts");
-
 
 
 let CreaterecipeComponent = class CreaterecipeComponent {
-    constructor() {
-        this.myinterval = null;
-        this.timers = new Array();
-        this.i1 = new src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__["Instruction"]("Eat a burger, skip cooking.", false, 2000, this.timers);
-        this.i2 = new src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__["Instruction"]("Eat a burger, skip cooking.", false, 2000, this.timers);
-        this.i3 = new src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__["Instruction"]("Eat a burger, skip cooking.", false, 2000, this.timers);
-    }
+    constructor() { }
     ngOnInit() {
-        this.updateTimers(this.timers);
-    }
-    //!!!
-    testThing() {
-        console.log(this.timers);
-    }
-    updateTimers(timers) {
-        if (this.myinterval === null) {
-            this.myinterval = setInterval(function () {
-                timers.forEach((t) => {
-                    if (!t.ispaused) {
-                        t.updateTime();
-                        t.timelast = (new Date()).getTime();
-                        if (t.timeleft <= 0) {
-                            t.togglePause();
-                            t.timeleft = t.timetotal;
-                            console.log("A timer has finished.");
-                        }
-                    }
-                });
-            }, 100);
-        }
     }
 };
 CreaterecipeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -325,11 +295,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TryrecipeComponent", function() { return TryrecipeComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/models/Instruction */ "./src/app/models/Instruction.ts");
+/* harmony import */ var src_app_models_Recipe__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/models/Recipe */ "./src/app/models/Recipe.ts");
+
+
 
 
 let TryrecipeComponent = class TryrecipeComponent {
-    constructor() { }
+    constructor() {
+        this.myinterval = null;
+        this.timers = new Array();
+        this.i1 = new src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__["Instruction"](1, null, false, "1", null, this.timers);
+        this.i2 = new src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__["Instruction"](2, 1, true, "2", 30000, this.timers);
+        this.i3 = new src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__["Instruction"](3, 2, false, "3", null, this.timers);
+        this.i4 = new src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__["Instruction"](4, 3, false, "4.", null, this.timers);
+        this.i5 = new src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__["Instruction"](5, 4, true, "5.", null, this.timers);
+        this.i6 = new src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__["Instruction"](6, 5, false, "6.", null, this.timers);
+        this.i7 = new src_app_models_Instruction__WEBPACK_IMPORTED_MODULE_2__["Instruction"](7, 6, false, "7.", null, this.timers);
+        this.instructions = new Array(this.i7, this.i6, this.i3, this.i4, this.i5, this.i2, this.i1);
+        this.recipe1 = new src_app_models_Recipe__WEBPACK_IMPORTED_MODULE_3__["Recipe"](1, this.instructions);
+        this.isTest = false;
+    }
     ngOnInit() {
+        this.updateTimers(this.timers);
+    }
+    //!!!
+    testThing() {
+        this.i2.timer.togglePause();
+    }
+    updateTimers(timers) {
+        if (this.myinterval === null) {
+            this.myinterval = setInterval(function () {
+                timers.forEach((t) => {
+                    if (!t.ispaused) {
+                        t.updateTime();
+                        t.timelast = (new Date()).getTime();
+                        if (t.timeleft <= 0) {
+                            t.togglePause();
+                            t.timeleft = t.timetotal;
+                            console.log("A timer has finished.");
+                        }
+                    }
+                });
+            }, 100);
+        }
     }
 };
 TryrecipeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -357,20 +366,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Timer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Timer */ "./src/app/models/Timer.ts");
 
 class Instruction {
-    constructor(description, option, duration, timerarray) {
+    constructor(id, previousinstruction, issub, description, duration, timers) {
+        this.id = id;
+        this.previousinstruction = previousinstruction;
+        this.issub = issub;
         this.description = description;
-        this.option = option;
-        if (duration != null) {
+        if (duration === null) {
+            this.timer = null;
+        }
+        else {
             this.timer = new _Timer__WEBPACK_IMPORTED_MODULE_0__["Timer"](duration);
-            console.log("Timer was created");
-            timerarray.push(this.timer);
-            console.log(timerarray);
+            timers.push(this.timer);
+            console.log(timers);
         }
     }
 }
 Instruction.ctorParameters = () => [
-    { type: String },
+    { type: Number },
+    { type: Number },
     { type: Boolean },
+    { type: String },
+    { type: Number },
+    { type: Array }
+];
+
+
+/***/ }),
+
+/***/ "./src/app/models/Recipe.ts":
+/*!**********************************!*\
+  !*** ./src/app/models/Recipe.ts ***!
+  \**********************************/
+/*! exports provided: Recipe */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Recipe", function() { return Recipe; });
+class Recipe {
+    constructor(id, instructions) {
+        this.id = id;
+        this.instructions = instructions;
+        this.orderInstructions();
+    }
+    orderInstructions() {
+        let ia = this.instructions;
+        let prevtofind = null;
+        let currenti = 0;
+        for (let i = 0; i < ia.length; i++) {
+            if (ia[i].previousinstruction === prevtofind) {
+                let element = ia[i];
+                ia.splice(i, 1);
+                ia.splice(currenti++, 0, element);
+                prevtofind = element.id;
+                i = prevtofind;
+            }
+        }
+        this.instructions = ia;
+    }
+}
+Recipe.ctorParameters = () => [
     { type: Number },
     { type: Array }
 ];
