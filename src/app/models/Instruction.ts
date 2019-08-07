@@ -1,19 +1,25 @@
 import { Timer } from './Timer';
 
 export class Instruction{
+    id:number;
+    previousinstruction:number;
+    issub:boolean;
     description:string;
-    option:boolean;
     timer:Timer;
 
-    constructor(description:string,option:boolean,duration:number,timerarray:Array<Timer>){
+    constructor(id:number,previousinstruction:number,issub:boolean,description:string,duration:number,timers:Array<Timer>){
+        this.id = id;
+        this.previousinstruction = previousinstruction;
+        this.issub = issub;
         this.description = description;
-        this.option = option;
 
-        if(duration != null){
+        if(duration === null){
+            this.timer = null;
+        }
+        else{
             this.timer = new Timer(duration);
-            console.log("Timer was created");
-            timerarray.push(this.timer);
-            console.log(timerarray);
+            timers.push(this.timer);
+            console.log(timers);
         }
     }
 }
