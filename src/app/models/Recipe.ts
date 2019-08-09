@@ -2,12 +2,17 @@ import { Instruction } from './Instruction';
 
 export class Recipe{
     id:number;
+    title:string;
     instructions:Array<Instruction>;
 
-    constructor(id:number,instructions:Array<Instruction>){
+    constructor(id:number,title:string,instructions:Array<Instruction>){
         this.id = id;
+        this.title = title;
         this.instructions = instructions;
-        this.orderInstructions();
+
+        if(this.instructions != null){
+            this.orderInstructions();
+        }
     }
 
     private orderInstructions(){

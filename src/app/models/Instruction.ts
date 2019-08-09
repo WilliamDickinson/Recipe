@@ -7,7 +7,7 @@ export class Instruction{
     description:string;
     timer:Timer;
 
-    constructor(id:number,previousinstruction:number,issub:boolean,description:string,duration:number,timers:Array<Timer>){
+    constructor(id:number,previousinstruction:number,issub:boolean,description:string,duration:number){
         this.id = id;
         this.previousinstruction = previousinstruction;
         this.issub = issub;
@@ -18,8 +18,6 @@ export class Instruction{
         }
         else{
             this.timer = new Timer(duration);
-            timers.push(this.timer);
-            console.log(timers);
         }
     }
 }
