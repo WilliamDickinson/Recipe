@@ -1,1 +1,33 @@
-<p>createrecipe works!</p>
+<!-- Start with one table row
+User clicks button to add instructions
+    Option for sub instruction
+Generates next row -->
+
+<!-- <table id="createTable">
+    <tr><td>Testing instruction creation</td></tr>
+</table>
+<br>
+<button type="button" onclick="rowInsertion()">Add new instruction</button> -->
+
+<table>
+    <tr *ngFor = "let instruction of instructions">
+        <td>{{instruction.id}}</td>
+        <td>{{instruction.description}}</td>
+        <!-- <td>{{instruction.duration}}</td> -->
+        <td>{{instruction.timer.timetotal | time}}</td>
+    </tr>
+    <tr id="instructionEntry">
+        <td><input type="text" id="desc" value="Description" [(ngModel)] = "description"></td>
+        <td>Duration:<input type="number" id="hour" min="0" max="24" [(ngModel)] = "hourInput"></td>
+        <td> : <input type="number" id="minute" min="0" max="59" [(ngModel)] = "minuteInput"></td>
+        <td> : <input type="number" id="second" min="0" max="59"  [(ngModel)] = "secInput"></td>
+    </tr>
+    <tr id="subbutton"><button (click)="createSubRow()">Sub</button></tr>
+    <tr id="superbutton"><button (click)="createSuperRow()">Super</button></tr>
+</table>
+
+<br>
+
+<p>{{((3600000 * hourInput) + (60000 * minuteInput) + (1000 * secInput)) | time}}</p>
+
+<button (click)="submitRecipe()">Submit</button>
