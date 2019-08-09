@@ -3,18 +3,13 @@ User clicks button to add instructions
     Option for sub instruction
 Generates next row -->
 
-<!-- <table id="createTable">
-    <tr><td>Testing instruction creation</td></tr>
-</table>
-<br>
-<button type="button" onclick="rowInsertion()">Add new instruction</button> -->
-
 <table>
+    <tr><input type="text" id="recipeName" value="Recipe Name" [(ngModel)] = "recipeName"></tr>
     <tr *ngFor = "let instruction of instructions">
-        <td>{{instruction.id}}</td>
+        <td *ngIf="instruction.issub"></td>
         <td>{{instruction.description}}</td>
-        <!-- <td>{{instruction.duration}}</td> -->
         <td>{{instruction.timer.timetotal | time}}</td>
+        <td id="deletebutton"><button (click)="deleteInstruction(instruction)">Delete</button></td>
     </tr>
     <tr id="instructionEntry">
         <td><input type="text" id="desc" value="Description" [(ngModel)] = "description"></td>
@@ -22,12 +17,12 @@ Generates next row -->
         <td> : <input type="number" id="minute" min="0" max="59" [(ngModel)] = "minuteInput"></td>
         <td> : <input type="number" id="second" min="0" max="59"  [(ngModel)] = "secInput"></td>
     </tr>
-    <tr id="subbutton"><button (click)="createSubRow()">Sub</button></tr>
-    <tr id="superbutton"><button (click)="createSuperRow()">Super</button></tr>
+    <tr><td id="superbutton"><button (click)="createSuperRow()">Add Instruction</button></td>
+        <td id="subbutton"><button (click)="createSubRow()">Add Sub-Instruction</button></td></tr>
 </table>
 
 <br>
 
-<p>{{((3600000 * hourInput) + (60000 * minuteInput) + (1000 * secInput)) | time}}</p>
+<!-- <p>{{((3600000 * hourInput) + (60000 * minuteInput) + (1000 * secInput)) | time}}</p> -->
 
 <button (click)="submitRecipe()">Submit</button>

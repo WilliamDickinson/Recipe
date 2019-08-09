@@ -26,32 +26,21 @@ export class TimePipe implements PipeTransform {
     let millToSec:number = Math.floor(remainder / 1000);
     remainder = (remainder % 1000);
 
-    // let lengthHour:number = Math.floor(Math.log(millToHour) / Math.LN10 + 1);
-    // let lengthMinute:number = Math.floor(Math.log(millToMinute) / Math.LN10 + 1);
-    // let lengthSec:number = Math.floor(Math.log(millToSec) / Math.LN10 + 1);
+    let hours:string = "";
+    if(millToHour <= 9) hours += "0";
+    hours += millToHour;
 
-    return millToHour + ":" + millToMinute + ":" + millToSec;
+    let minutes:string = "";
+    if(millToMinute <= 9) minutes += "0";
+    minutes += millToMinute;
 
-    // if (milliseconds >= 3600000){
-    //   let millToHour:number = (milliseconds / 3600000);
-    //   let remainderH:number = (milliseconds % 3600000);
+    let secs:string = "";
+    if(millToSec <= 9) secs += "0";
+    secs += millToSec;
 
-    //   if(remainderH >= 60000){
-    //     let millToMinute:number = (remainderH / 60000);
-    //     let remainderM:number = remainderH - (60000 * millToMinute);
 
-    //     if(remainderM >= 1000){
-    //       let millToSec:number = (remainderM / 1000);
-    //       // let totalTime:string = remainderH + ":" + remainderM + ":" + millToSec;
-    //     } 
+    return hours + ":" + minutes + ":" + secs;
 
-    //     let totalTime:string = remainderH + ":" + millToMinute + ":" + remainderM;
-    //   }
-
-    //   let totalTime:string = millToHour + ":" + remainderH;
-    // } 
-
-    // return totalTime;
   }
 
 }
