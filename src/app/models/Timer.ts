@@ -19,9 +19,17 @@ export class Timer{
     }
 
     public updateTime(){
-        let curTime:number = (new Date()).getTime();
+        if(!this.ispaused){
+            let curTime:number = (new Date()).getTime();
 
-        this.timeleft -= (curTime-this.timelast);
-        this.timelast = curTime;
+            this.timeleft -= (curTime-this.timelast);
+            this.timelast = curTime;
+
+            if(this.timeleft <= 0){
+                this.ispaused = true;
+                this.timeleft = this.timetotal;
+                console.log("A timer has finished.");
+            }
+        }
     }
 }
