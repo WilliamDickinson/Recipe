@@ -1,1 +1,23 @@
-<p>searchrecipe works!</p>
+<!-- <p>searchrecipe works!</p> -->
+
+
+<!-- <button [routerLink]="['../tryrecipe']">Go to tryrecipe</button> -->
+
+
+<div *ngIf="currentrecipe === null;else elseBlock">
+
+    <table *ngFor="let r of recipes">
+        <tr>
+            <td><button (click)="currentrecipe = r">{{r.title}}</button></td>
+        </tr>
+
+
+
+    </table>
+</div>
+
+<ng-template #elseBlock>
+    <app-tryrecipe [currentrecipe]="currentrecipe"></app-tryrecipe>
+</ng-template>
+
+

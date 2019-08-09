@@ -1,14 +1,16 @@
-<p>tryrecipe works!</p>
+<!-- <p>tryrecipe works!</p> -->
 
 
 
+<p>{{this.updateTimers()}}</p>
+
+<p>{{currentrecipe.title}}</p>
 
 <table>
-    <tr *ngFor="let i of instructions">
+    <tr *ngFor="let i of currentrecipe.instructions">
         <td *ngIf="i.issub">Is a sub - </td>
         <td *ngIf= "i.timer === null; else elseBlock"><input type="checkbox"></td>
         <ng-template #elseBlock><button (click)="togglePause(i)">{{i.timer.timeleft | date: "mm:ss"}}</button></ng-template>
-        <!-- <ng-template #elseBlock>{{i.timer.timeleft | date: "mm:ss"}}</ng-template> -->
         <td>{{i.description}}</td>
         <td>{{i.option}}</td>
     </tr>
