@@ -12,4 +12,4 @@ phases:
         - ng build
     post_build:
       commands:
-        - aws s3 cp dist/Recipe s3://recipefrontend --recursive
+        - aws s3 cp dist/Recipe s3://recipe.dev --recursive
