@@ -16,29 +16,26 @@ export class CreaterecipeComponent implements OnInit {
   ngOnInit() {
   }
 
-  // rowInsertion() {
-  //   let table: HTMLTableElement = <HTMLTableElement>
-  //   let row = table.insertRow(-1);
-  //   let testcell = row.insertCell(0);
-  //   testcell.innerHTML = "New Test Instruction";
-  // }
+  recipeName: string = "Recipe Name";
 
   // start with empty array -> push instructions into the array
   //    options for issub, how much time in timer
   // submit recipe
 
   timers: Array<Timer> = [];
-  
-  instruction:Instruction = new Instruction(0,null,false,"description",0,this.timers);
+
+
+  instruction: Instruction = new Instruction(0, null, false, "description", 0);
   instructions: Array<Instruction> = [];
 
-  recipe:Recipe = new Recipe(0,this.instructions);
+  recipe: Recipe = new Recipe(0, this.recipeName, this.instructions);
 
-  id:number = 0;
-  description:string = "Description";
-  hourInput:number = 0;
-  minuteInput:number = 0;
-  secInput:number = 0;
+
+  id: number = 0;
+  description: string = "Description";
+  hourInput: number = 0;
+  minuteInput: number = 0;
+  secInput: number = 0;
   // totalTime:number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
   // calculate time into total time in milliseconds
 
@@ -46,28 +43,42 @@ export class CreaterecipeComponent implements OnInit {
   // push Instruction object to 'instructions' array
   public createSuperRow() {
 
-    let totalTime:number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
-    let newId:number = this.id;
+    let totalTime: number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
+    let newId: number = this.id;
 
-    let newInstruction = new Instruction(++newId, null, false, this.description, totalTime, this.timers);
-    this.id=newId;
+    let newInstruction = new Instruction(++newId, null, false, this.description, totalTime);
+
+    this.id = newId;
 
     this.instructions.push(newInstruction);
+
+    this.description = "";
+    this.hourInput = 0;
+    this.minuteInput = 0;
+    this.secInput = 0;
 
   }
 
   public createSubRow() {
-    let totalTime:number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
-    let newId:number = this.id;
+    let totalTime: number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
+    let newId: number = this.id;
 
-    let newInstruction = new Instruction(++newId, null, true, this.description, totalTime, this.timers);
-    this.id=newId;
+    let newInstruction = new Instruction(++newId, null, true, this.description, totalTime);
+
+    this.id = newId;
+
 
     this.instructions.push(newInstruction);
+
+    this.description = "";
+    this.hourInput = 0;
+    this.minuteInput = 0;
+    this.secInput = 0;
   }
 
-  public submitRecipe() {
-
+  public deleteInstruction(i:Instruction) {
+    let index:number = this.instructions.indexOf(i,0);
+    this.instructions.splice(index,1);
   }
 
 }
