@@ -29,10 +29,10 @@ export class CreaterecipeComponent implements OnInit {
 
   timers: Array<Timer> = [];
   
-  instruction:Instruction = new Instruction(0,null,false,"description",0,this.timers);
+  instruction:Instruction = new Instruction(0,null,false,"description",0);
   instructions: Array<Instruction> = [];
 
-  recipe:Recipe = new Recipe(0,this.instructions);
+  recipe:Recipe = new Recipe(0,"This is a title",this.instructions);
 
   id:number = 0;
   description:string = "Description";
@@ -49,7 +49,7 @@ export class CreaterecipeComponent implements OnInit {
     let totalTime:number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
     let newId:number = this.id;
 
-    let newInstruction = new Instruction(++newId, null, false, this.description, totalTime, this.timers);
+    let newInstruction = new Instruction(++newId, null, false, this.description, totalTime);
     this.id=newId;
 
     this.instructions.push(newInstruction);
@@ -60,7 +60,7 @@ export class CreaterecipeComponent implements OnInit {
     let totalTime:number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
     let newId:number = this.id;
 
-    let newInstruction = new Instruction(++newId, null, true, this.description, totalTime, this.timers);
+    let newInstruction = new Instruction(++newId, null, true, this.description, totalTime);
     this.id=newId;
 
     this.instructions.push(newInstruction);
