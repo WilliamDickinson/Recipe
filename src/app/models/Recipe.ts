@@ -4,6 +4,7 @@ export class Recipe{
     id:number;
     title:string;
     instructions:Array<Instruction>;
+    ingredients:null;
 
     constructor(id:number,title:string,instructions:Array<Instruction>){
         this.id = id;
