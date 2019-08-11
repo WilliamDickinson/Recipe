@@ -3,26 +3,65 @@ User clicks button to add instructions
     Option for sub instruction
 Generates next row -->
 
-<table>
-    <tr><input type="text" id="recipeName" value="Recipe Name" [(ngModel)] = "recipeName"></tr>
+<!-- <table>
+    <tr><input type="text" id="recipeName" placeholder="Recipe Name" [(ngModel)] = "recipeName"></tr>
     <tr *ngFor = "let instruction of instructions">
         <td *ngIf="instruction.issub"></td>
         <td>{{instruction.description}}</td>
-        <td>{{instruction.timer.timetotal | time}}</td>
+        <td *ngIf="instruction.timer === null; else elseBlock"></td>
+        <ng-template #elseBlock>{{instruction.timer.timetotal | time}}</ng-template>
+        <td *ngIf="instruction.previousinstruction === null; else elseBlock"></td>
+        <ng-template #elseBlock>Previous Instruction: {{instruction.previousinstruction}}</ng-template>
         <td id="deletebutton"><button (click)="deleteInstruction(instruction)">Delete</button></td>
     </tr>
     <tr id="instructionEntry">
-        <td><input type="text" id="desc" value="Description" [(ngModel)] = "description"></td>
+        <td><input type="text" id="desc" placeholder="Description" [(ngModel)] = "description"></td>
         <td>Duration:<input type="number" id="hour" min="0" max="24" [(ngModel)] = "hourInput"></td>
         <td> : <input type="number" id="minute" min="0" max="59" [(ngModel)] = "minuteInput"></td>
         <td> : <input type="number" id="second" min="0" max="59"  [(ngModel)] = "secInput"></td>
     </tr>
     <tr><td id="superbutton"><button (click)="createSuperRow()">Add Instruction</button></td>
         <td id="subbutton"><button (click)="createSubRow()">Add Sub-Instruction</button></td></tr>
-</table>
+</table> -->
 
-<br>
+<!-- <br>
 
-<!-- <p>{{((3600000 * hourInput) + (60000 * minuteInput) + (1000 * secInput)) | time}}</p> -->
+<p>{{((3600000 * hourInput) + (60000 * minuteInput) + (1000 * secInput)) | time}}</p>
 
-<button (click)="submitRecipe()">Submit</button>
+<button (click)="submitRecipe()">Submit</button> -->
+
+<div class="col align-self-center">
+ 
+    <table>
+        <tr><input type="text" id="recipeName" placeholder="Recipe Name" [(ngModel)] = "recipeName"></tr> 
+        <div  class="table table-striped table-success text-nowrap table-hover" style="background-color:lightgreen">  
+            <tbody>
+            <tr scope="col" *ngFor = "let instruction of instructions" >
+                <td scope="col" *ngIf="instruction.isSub"></td>
+                <td scope="col">{{instruction.description}}</td>
+                <td scope="col" *ngIf="instruction.duration === 0; else elseBlock"></td>
+                <ng-template #elseBlock scope="col">{{instruction.duration | time}}</ng-template>
+                <td id="deletebutton"><button class="btn btn-outline-danger" (click)="deleteInstruction(instruction)">Delete</button></td>
+            </tr>
+            </tbody>
+        </div>
+        <tr id="instructionEntry">
+            <div>
+                <td><input type="text" id="desc" placeholder="Description" [(ngModel)] = "description"></td>
+                <td>Duration:<input type="number" id="hour" min="0" max="24" [(ngModel)] = "hourInput"></td>
+                <td> : <input type="number" id="minute" min="0" max="59" [(ngModel)] = "minuteInput"></td>
+                <td> : <input type="number" id="second" min="0" max="59"  [(ngModel)] = "secInput"></td>
+            </div>     
+        </tr>
+        <tr>
+            <div class="btn-group btn-group-toggle" >
+                <td  id="superbutton"><button class="btn btn-outline-primary" (click)="createSuperRow()">Add Instruction</button></td>
+                <td id="subbutton"><button class="btn btn-outline-primary" (click)="createSubRow()">Add Sub-Instruction</button></td>
+            </div>
+        </tr>
+          
+    </table>
+    <br>
+    <button class="btn btn-outline-primary" (click)="submitRecipe()">Submit Recipe</button>
+    <button class="btn btn-outline-primary" (click)="getRecipes()">Get Recipes</button>
+</div>

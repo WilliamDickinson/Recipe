@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Instruction } from 'src/app/models/Instruction';
+import { DbcommService } from 'src/app/services/dbcomm.service';
 import { Recipe } from 'src/app/models/Recipe';
 import { Timer } from 'src/app/models/Timer';
 
@@ -11,7 +12,7 @@ import { Timer } from 'src/app/models/Timer';
 })
 export class CreaterecipeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dbcommservice: DbcommService) { }
 
   ngOnInit() {
   }
@@ -24,14 +25,13 @@ export class CreaterecipeComponent implements OnInit {
 
   timers: Array<Timer> = [];
 
-
   instruction: Instruction = new Instruction(0, null, false, "description", 0);
   instructions: Array<Instruction> = [];
 
-  recipe: Recipe = new Recipe(0, this.recipeName, this.instructions);
+  recipe: Recipe;
 
-
-  id: number = 0;
+  i_id: number = 0;
+  stepOrder:number = 0;
   description: string = "Description";
   hourInput: number = 0;
   minuteInput: number = 0;
@@ -44,11 +44,21 @@ export class CreaterecipeComponent implements OnInit {
   public createSuperRow() {
 
     let totalTime: number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
-    let newId: number = this.id;
+    let newId: number = this.stepOrder;
 
-    let newInstruction = new Instruction(++newId, null, false, this.description, totalTime);
+    let t: number = totalTime;
 
-    this.id = newId;
+    let previnst: number;
+
+    if (this.instructions.length === 0) {
+      previnst = null;
+    }
+    else {
+      previnst = this.instructions[this.instructions.length - 1].stepOrder;
+    }
+
+    let newInstruction = new Instruction(++newId, previnst, false, this.description, t);
+    this.stepOrder = newId;
 
     this.instructions.push(newInstruction);
 
@@ -61,12 +71,21 @@ export class CreaterecipeComponent implements OnInit {
 
   public createSubRow() {
     let totalTime: number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
-    let newId: number = this.id;
+    let newId: number = this.stepOrder;
+    let t: number = totalTime;
 
-    let newInstruction = new Instruction(++newId, null, true, this.description, totalTime);
+    let previnst: number;
 
-    this.id = newId;
+    if (this.instructions.length === 0) {
+      previnst = null;
+    }
+    else {
+      previnst = this.instructions[this.instructions.length - 1].stepOrder;
+    }
 
+    let newInstruction = new Instruction(++newId, previnst, true, this.description, t);
+
+    this.stepOrder = newId;
 
     this.instructions.push(newInstruction);
 
@@ -76,9 +95,34 @@ export class CreaterecipeComponent implements OnInit {
     this.secInput = 0;
   }
 
-  public deleteInstruction(i:Instruction) {
-    let index:number = this.instructions.indexOf(i,0);
-    this.instructions.splice(index,1);
+  public deleteInstruction(i: Instruction) {
+    let index: number = this.instructions.indexOf(i, 0);
+    let previnst: number = this.instructions[index].prior;
+    this.instructions.splice(index, 1);
+
+
+    if (index >= this.instructions.length) {
+      //Do nothing
+    }
+    else {
+      this.instructions[index].prior = previnst;
+    }
+  }
+
+  public submitRecipe() {
+    let newRecipe: Recipe = new Recipe(0, this.recipeName, this.instructions);
+    console.log(this.dbcommservice.createRecipe(newRecipe));
+    console.log(JSON.stringify(newRecipe));
+    this.dbcommservice.createRecipe(newRecipe);
+    
+    //console.log(this.dbcommservice.getRecipe());
+  }
+
+  public getRecipes(){
+    let response:Promise<Recipe[]> = this.dbcommservice.getRecipes();
+    response.then((result)=>{
+      console.log(result);
+    });
   }
 
 }

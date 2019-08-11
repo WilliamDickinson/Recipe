@@ -15,29 +15,32 @@ export class TryrecipeComponent implements OnInit {
 
   @Input() currentrecipe:Recipe;
 
-  
+
+
 
 
   ngOnInit() {
     this.myinterval = setInterval(this.updateTimers,100);
   }
 
+  isTest:boolean = false;
 
-
-
+  //!!!
   public togglePause(i:Instruction){
-    i.timer.togglePause();
+    // i.timer.togglePause();
   }
 
+  
+
   public updateTimers() {
-    if (this.currentrecipe != null) {
-      this.currentrecipe.instructions.forEach((i) => {
-        let t = i.timer;
-        if(t != null){
-          t.updateTime();
-        }
-      });
-    }
+    // if (this.currentrecipe != null) {
+    //   this.currentrecipe.instructions.forEach((i) => {
+    //     let t = i.timer;
+    //     if(t != null){
+    //       t.updateTime();
+    //     }
+    //   });
+    // }
   }
 
 }
