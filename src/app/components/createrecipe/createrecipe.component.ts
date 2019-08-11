@@ -28,9 +28,10 @@ export class CreaterecipeComponent implements OnInit {
   instruction: Instruction = new Instruction(0, null, false, "description", 0);
   instructions: Array<Instruction> = [];
 
-  recipe: Recipe = new Recipe(0, this.recipeName, this.instructions);
+  recipe: Recipe;
 
-  id: number = 0;
+  i_id: number = 0;
+  stepOrder:number = 0;
   description: string = "Description";
   hourInput: number = 0;
   minuteInput: number = 0;
@@ -43,13 +44,9 @@ export class CreaterecipeComponent implements OnInit {
   public createSuperRow() {
 
     let totalTime: number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
-    let newId: number = this.id;
+    let newId: number = this.stepOrder;
 
     let t: number = totalTime;
-
-    if (t === 0) {
-      t = null;
-    }
 
     let previnst: number;
 
@@ -57,11 +54,11 @@ export class CreaterecipeComponent implements OnInit {
       previnst = null;
     }
     else {
-      previnst = this.instructions[this.instructions.length - 1].id;
+      previnst = this.instructions[this.instructions.length - 1].stepOrder;
     }
 
     let newInstruction = new Instruction(++newId, previnst, false, this.description, t);
-    this.id = newId;
+    this.stepOrder = newId;
 
     this.instructions.push(newInstruction);
 
@@ -74,12 +71,8 @@ export class CreaterecipeComponent implements OnInit {
 
   public createSubRow() {
     let totalTime: number = ((3600000 * this.hourInput) + (60000 * this.minuteInput) + (1000 * this.secInput));
-    let newId: number = this.id;
+    let newId: number = this.stepOrder;
     let t: number = totalTime;
-
-    if (t === 0) {
-      t = null;
-    }
 
     let previnst: number;
 
@@ -87,12 +80,12 @@ export class CreaterecipeComponent implements OnInit {
       previnst = null;
     }
     else {
-      previnst = this.instructions[this.instructions.length - 1].id;
+      previnst = this.instructions[this.instructions.length - 1].stepOrder;
     }
 
     let newInstruction = new Instruction(++newId, previnst, true, this.description, t);
 
-    this.id = newId;
+    this.stepOrder = newId;
 
     this.instructions.push(newInstruction);
 
@@ -104,7 +97,7 @@ export class CreaterecipeComponent implements OnInit {
 
   public deleteInstruction(i: Instruction) {
     let index: number = this.instructions.indexOf(i, 0);
-    let previnst: number = this.instructions[index].previousinstruction;
+    let previnst: number = this.instructions[index].prior;
     this.instructions.splice(index, 1);
 
 
@@ -112,12 +105,24 @@ export class CreaterecipeComponent implements OnInit {
       //Do nothing
     }
     else {
-      this.instructions[index].previousinstruction = previnst;
+      this.instructions[index].prior = previnst;
     }
   }
 
   public submitRecipe() {
-    this.dbcommservice.createRecipe(this.recipe);
+    let newRecipe: Recipe = new Recipe(0, this.recipeName, this.instructions);
+    console.log(this.dbcommservice.createRecipe(newRecipe));
+    console.log(JSON.stringify(newRecipe));
+    this.dbcommservice.createRecipe(newRecipe);
+    
+    //console.log(this.dbcommservice.getRecipe());
+  }
+
+  public getRecipes(){
+    let response:Promise<Recipe[]> = this.dbcommservice.getRecipes();
+    response.then((result)=>{
+      console.log(result);
+    });
   }
 
 }

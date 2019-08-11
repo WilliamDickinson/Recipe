@@ -27,20 +27,20 @@ export class TryrecipeComponent implements OnInit {
 
   //!!!
   public togglePause(i:Instruction){
-    i.timer.togglePause();
+    // i.timer.togglePause();
   }
 
   
 
   public updateTimers() {
-    if (this.currentrecipe != null) {
-      this.currentrecipe.instructions.forEach((i) => {
-        let t = i.timer;
-        if(t != null){
-          t.updateTime();
-        }
-      });
-    }
+    // if (this.currentrecipe != null) {
+    //   this.currentrecipe.instructions.forEach((i) => {
+    //     let t = i.timer;
+    //     if(t != null){
+    //       t.updateTime();
+    //     }
+    //   });
+    // }
   }
 
 }

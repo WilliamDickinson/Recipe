@@ -4,7 +4,7 @@ export class Recipe{
     id:number;
     title:string;
     instructions:Array<Instruction>;
-    ingredients:null;
+    ingredients:Array<number> = new Array<number>();
 
     constructor(id:number,title:string,instructions:Array<Instruction>){
         this.id = id;
@@ -22,11 +22,11 @@ export class Recipe{
         let currenti = 0;
 
         for(let i:number = 0;i<ia.length;i++){
-            if(ia[i].previousinstruction === prevtofind){
+            if(ia[i].prior === prevtofind){
                 let element = ia[i];
                 ia.splice(i,1);
                 ia.splice(currenti++,0,element);
-                prevtofind = element.id;
+                prevtofind = element.stepOrder;
                 i = prevtofind;
             }
         }
