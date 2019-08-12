@@ -33,24 +33,12 @@ export class TryrecipeComponent implements OnInit {
   
 
   public updateTimers() {
-<<<<<<< HEAD
-
     if (this.currentrecipe != null) {
       this.timers.forEach((t) => {
 
         t.updateTime();
       });
     }
-=======
-    // if (this.currentrecipe != null) {
-    //   this.currentrecipe.instructions.forEach((i) => {
-    //     let t = i.timer;
-    //     if(t != null){
-    //       t.updateTime();
-    //     }
-    //   });
-    // }
->>>>>>> 9a7aa7c67b7996f07ee4c545b7e6f11bbd391de0
   }
 
 }
