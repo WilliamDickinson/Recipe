@@ -1,10 +1,12 @@
 export class Timer{
+    i_id:number;
     timetotal:number;
     timeleft:number;
     timelast:number;
     ispaused:boolean;
 
-    constructor(timetotal:number){
+    constructor(i_id:number,timetotal:number){
+        this.i_id = i_id;
         this.timetotal = timetotal;
         this.timeleft = timetotal;
         this.timelast = (new Date()).getTime();
@@ -28,7 +30,7 @@ export class Timer{
             if(this.timeleft <= 0){
                 this.ispaused = true;
                 this.timeleft = this.timetotal;
-                console.log("A timer has finished.");
+                alert("A timer has finished.");
             }
         }
     }
