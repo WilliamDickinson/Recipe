@@ -1,19 +1,18 @@
 
 
-
-<p>Current Recipe: {{currentrecipe.title}}</p>
-
-<table>
-    <tr *ngFor="let i of currentrecipe.instructions">
-        <td *ngIf="i.issub"></td>
-        <td *ngIf= "i.duration === 0; else elseBlock"><input type="checkbox"></td>
-        <ng-template #elseBlock><button (click)="togglePause(i)">{{timers[i.id].timeleft | date: "mm:ss"}}</button></ng-template>
-        <!-- <ng-template #elseBlock><button (click)="togglePause(i)"></button></ng-template> -->
-        <td>{{i.description}}</td>
-        <td>{{i.option}}</td>
-        <td>The id: {{i.id}}</td>
-        <td>The prior: {{i.priorStepId}}</td>
-    </tr>
-    <tr>{{updateTimers()}}</tr>
-
-</table>
+<div id="divtable">
+    <p>Current Recipe: {{currentrecipe.title}}</p>
+    <table>
+        <tr *ngFor="let i of currentrecipe.instructions">
+            <!-- <td *ngIf="i.issub"></td> -->
+            <td *ngIf="i.duration === 0; else elseBlock"><input type="checkbox"></td>
+            <ng-template #elseBlock><button class="btn btn-outline-primary" (click)="togglePause(i)">{{timers[i.id].timeleft | date: "mm:ss"}}</button>
+            </ng-template>
+            <!-- <ng-template #elseBlock><button (click)="togglePause(i)"></button></ng-template> -->
+            <td style="padding-left:10px">{{i.description}}</td>
+            <td>{{i.option}}</td>
+        </tr>
+        <tr>{{updateTimers()}}</tr>
+<br>
+    </table>
+</div>
