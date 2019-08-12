@@ -111,12 +111,6 @@ export class CreaterecipeComponent implements OnInit {
 
   public submitRecipe() {
     let newRecipe: Recipe = new Recipe(0, this.recipeName, this.instructions);
-<<<<<<< HEAD
-
-=======
-    console.log(this.dbcommservice.createRecipe(newRecipe));
-    console.log(JSON.stringify(newRecipe));
->>>>>>> 9a7aa7c67b7996f07ee4c545b7e6f11bbd391de0
     this.dbcommservice.createRecipe(newRecipe);
   }
 
