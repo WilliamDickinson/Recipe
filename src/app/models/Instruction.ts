@@ -1,19 +1,27 @@
 import { Timer } from './Timer';
 
 export class Instruction{
-    id:number;
+    i_id:number;
     stepOrder:number;
-    priorStepId:number;
+    prior:number;
     isSub:boolean;
     description:string;
     duration:number;
+    // timer:Timer;
 
-    constructor(id:number,stepOrder:number,priorStepId:number,isSub:boolean,description:string,duration:number){
-        this.id = id;
+    constructor(i_id:number,stepOrder:number,isSub:boolean,description:string,duration:number){
+        this.i_id = i_id;
         this.stepOrder = stepOrder;
-        this.priorStepId = priorStepId;
         this.isSub = isSub;
         this.description = description;
         this.duration = duration;
+
+        // if(duration === null){
+        //     this.timer = null;
+        // }
+        // else{
+        //     this.timer = new Timer(duration);
+        // }
+
     }
 }

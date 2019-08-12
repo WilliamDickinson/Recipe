@@ -25,7 +25,7 @@ export class CreaterecipeComponent implements OnInit {
 
   timers: Array<Timer> = [];
 
-  instruction: Instruction = new Instruction(0,0, null, false, "description", 0);
+  instruction: Instruction = new Instruction(0, null, false, "description", 0);
   instructions: Array<Instruction> = [];
 
   recipe: Recipe;
@@ -57,7 +57,7 @@ export class CreaterecipeComponent implements OnInit {
       previnst = this.instructions[this.instructions.length - 1].stepOrder;
     }
 
-    let newInstruction = new Instruction(0,++newId, previnst, false, this.description, t);
+    let newInstruction = new Instruction(++newId, previnst, false, this.description, t);
     this.stepOrder = newId;
 
     this.instructions.push(newInstruction);
@@ -83,7 +83,7 @@ export class CreaterecipeComponent implements OnInit {
       previnst = this.instructions[this.instructions.length - 1].stepOrder;
     }
 
-    let newInstruction = new Instruction(0,++newId, previnst, true, this.description, t);
+    let newInstruction = new Instruction(++newId, previnst, true, this.description, t);
 
     this.stepOrder = newId;
 
@@ -97,7 +97,7 @@ export class CreaterecipeComponent implements OnInit {
 
   public deleteInstruction(i: Instruction) {
     let index: number = this.instructions.indexOf(i, 0);
-    let previnst: number = this.instructions[index].priorStepId;
+    let previnst: number = this.instructions[index].prior;
     this.instructions.splice(index, 1);
 
 
@@ -105,13 +105,26 @@ export class CreaterecipeComponent implements OnInit {
       //Do nothing
     }
     else {
-      this.instructions[index].priorStepId = previnst;
+      this.instructions[index].prior = previnst;
     }
   }
 
   public submitRecipe() {
     let newRecipe: Recipe = new Recipe(0, this.recipeName, this.instructions);
+<<<<<<< HEAD
 
+=======
+    console.log(this.dbcommservice.createRecipe(newRecipe));
+    console.log(JSON.stringify(newRecipe));
+>>>>>>> 9a7aa7c67b7996f07ee4c545b7e6f11bbd391de0
     this.dbcommservice.createRecipe(newRecipe);
   }
+
+  public getRecipes(){
+    let response:Promise<Recipe[]> = this.dbcommservice.getRecipes();
+    response.then((result)=>{
+      console.log(result);
+    });
+  }
+
 }
