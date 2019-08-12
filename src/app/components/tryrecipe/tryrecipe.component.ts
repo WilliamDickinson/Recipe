@@ -61,12 +61,12 @@ export class TryrecipeComponent implements OnInit {
 
   public updateTimers() {
 
-    // if (this.currentrecipe != null) {
-    //   this.timers.forEach((t) => {
+    if (this.currentrecipe != null) {
+      this.timers.forEach((t) => {
 
-    //     t.updateTime();
-    //   });
-    // }
+        t.updateTime();
+      });
+    }
   }
 
 }
