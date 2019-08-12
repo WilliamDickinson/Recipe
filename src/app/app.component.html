@@ -1,22 +1,17 @@
-
-<!-- <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-    <div class="topnav">
-        <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
-        <a class="nav-link" routerLink="createrecipe">Create a Recipe</a>
-        <a class="nav-link" routerLink="searchrecipe">Search a Recipe</a>
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light" style="top:0%;left:0%;position:fixed;width:100%">
+    <a class="navbar-brand btn btn-outline-warning" routerLink="createrecipe">Create a Recipe</a>
+    <a class="navbar-brand btn btn-outline-warning" routerLink="searchrecipe">Search a Recipe</a>
+    <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+    <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+    <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for a Recipe" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" routerLink="searchrecipe" >Search</button>
+    </form>
     </div>
 </nav> -->
 
-<!-- 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div >
-        <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
-        <a class="navbar-brand btn btn-outline-warning" routerLink="createrecipe">Create a Recipe</a>
-        <a class="navbar-brand btn btn-outline-warning" routerLink="searchrecipe">Search a Recipe</a>
-    </div>
-</nav> -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index:99;top:0%;left:0%;position:fixed;width:100%">
     <a class="navbar-brand btn btn-outline-warning" routerLink="createrecipe">Create a Recipe</a>
     <a class="navbar-brand btn btn-outline-warning" routerLink="searchrecipe">Search a Recipe</a>
     <div  class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -26,6 +21,13 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit" routerLink="searchrecipe" >Search</button>
     </form>
     </div>
-</nav>
+    <div style="font-size: 20px;padding-bottom: 9px;padding-right: 10px">The Web's Cookbook    -</div>
+    <p></p>
+    <img style="height:40px;width:40px"src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAb1BMVEX///8AAAAfHx8nJydDQ0Nra2s/Pz9PT093d3f7+/uXl5fLy8s3NzfT09Obm5vj4+Ozs7NbW1vr6+urq6vx8fHDw8MLCwtwcHDZ2dl8fHwYGBiJiYkrKytiYmJMTEwaGhoRERG5ubnFxcUyMjKPj48jiNmlAAAD20lEQVR4nO3d6XqiShSFYQaJIhpRSwRxiOm+/2vsjhkooJg37Cqzvp88WidvB09ISbaWhRBCCKEuxft04TG2JFGsvZPN3IyCMeNW2BQQP+E2PBoMETp8O+zhEPGHW/DVQIj/wg34biDkyP31/zQMcuD+8rOGQepeIO4kRSSQe43DGfQv1Lo5CWT+JBBRd86aBAmfBVJ7bWISZPsskOuzQGovTwDpFiBygBAGiBwghAEiBwhhgMgBQhggcoD48fthvVMcDEoH14fyQTlGSHA8fz3iEvrfB+Pka6/vtN37pUfepIO6QMLc5qSzfHyBQe6tiVP6OHhfKQ7qAtmUfs0/B5bwigfdg7Ur7Ww4B30gB8U7jVF6Vjx74SgOprpA7lHdE1q00AMSDHXY9l8dIEJ1tnSt9DphgJRe0n1yi//vmh4SUzjKJ9f0kAsN5Fb4lkwOEcNf6Z+FzJA9kcO+MEPI3sd2mSF0N3oIXohLBol5IXT3cwW8kNuzQFSXuP3a8EJq32/sUpT/iTg5hOw2u1V+3ckh71SQhBliUVzEf7TmhqQ0jpfCstNDxBsJ5M4OsV4pHPPiqhy/s9fd3dWyW2nTkQMy/M7aKCgtyrIdtBsoiRRbdDwbdGLQ2eWuFUty7f2+9r8KPgrVgmyb2KLntco1Vq/H97bCph/ktWI5QAABBBBAAAEEEEAAAQQQQAABBBBAAJkEslv1KqxYDndiywFCGCBygBAGiFwviB/0qupvSPCTHRBAAAHkl0F2/eZo7bWDEAeIHCCEASIHCGGAyAFCGCBygBAGiBwghAEiBwhh40NsZ5JIZmJrMzP+I0AAGSlAABkpQEqQaOYtJiv7g0bv+FnVdn1XSJTUze4jLxt8Q/GflSBv7wTrdWg0iHLQ3YiNBfEIVuvUWJBN84NpGwniNj+WuJEgV4LFukUL+Rk1VZrE0Cqxbqr6jKWF/PxUOvd6eu0HyjzaVj6XFpJNMev1YtcHkg0ISZofXE4fSDZ6MVKNY2hKH4g0j82pmGRQl0YQaR7Q27JqRnJlGkFyUyRPl3TZqebhpqvK52ZzOGkuuolGNA2JBuLTjZbjhVhrqhGl3JAWr1hDIFbI/D2h+w07oJouxw1RzH03FPL/WuXCd34Rb96Ivbfi+RztUXah/E61uERpscoYjo4NudbSKkB0CxDdAkS3ANEtQHSrCLktix/AYCZkISxr7xgPmX1uVYokMhriZH8LFl/NhURJbpRv6BgKKY3y9b/PL6MgrmriyWZuGiSq+HRA6+4aBdlWv2fnp5ExkHPx8wXybbaGQHaNOyCT3nCEEEIIPX//ANnNbMQNSSI3AAAAAElFTkSuQmCC"
+    >
+ </nav>
+<br>
+<br>
+<br>
 
-<router-outlet></router-outlet>
+ <router-outlet></router-outlet>
